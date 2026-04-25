@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package agsale.agent.v1;
+
+option go_package = "github.com/hongta0506/agsale-agent-proto/gen/go/agsale/agent/v1;agentv1";
+
+import "agsale/agent/v1/action.proto";
+import "agsale/agent/v1/common.proto";
+import "agsale/agent/v1/evaluation.proto";
+import "agsale/agent/v1/message.proto";
+
+service AgentRuntimeService {
+  rpc ProcessInbound(ProcessInboundRequest) returns (ProcessInboundResponse);
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+message ProcessInboundRequest {
+  RequestContext context = 1;
+  ConversationContext conversation = 2;
+  CustomerContext customer = 3;
+  InboundMessage message = 4;
+  AutomationMode automation_mode = 5;
+  repeated ConversationMessage recent_messages = 6;
+}
+
+message ProcessInboundResponse {
+  AgentDecision decision = 1;
+  ReplyDraft reply = 2;
+  MessageEvaluation message_evaluation = 3;
+  ConversationEvaluation conversation_evaluation = 4;
+  LeadScore lead_score = 5;
+  repeated AgentAction actions = 6;
+  repeated string warnings = 7;
+}
+
+message HealthCheckRequest {}
+
+message HealthCheckResponse {
+  string status = 1;
+  string version = 2;
+}
