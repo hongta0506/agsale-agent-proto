@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package agsale.agent.v1;
+
+option go_package = "github.com/hongta0506/agsale-agent-proto/gen/go/agsale/agent/v1;agentv1";
+
+enum AgentDecisionType {
+  AGENT_DECISION_TYPE_UNSPECIFIED = 0;
+  AGENT_DECISION_TYPE_NO_ACTION = 1;
+  AGENT_DECISION_TYPE_SUGGEST_REPLY = 2;
+  AGENT_DECISION_TYPE_SEND_REPLY = 3;
+  AGENT_DECISION_TYPE_ESCALATE_TO_HUMAN = 4;
+}
+
+enum AgentActionType {
+  AGENT_ACTION_TYPE_UNSPECIFIED = 0;
+  AGENT_ACTION_TYPE_CREATE_FOLLOW_UP = 1;
+  AGENT_ACTION_TYPE_TAG_CONVERSATION = 2;
+  AGENT_ACTION_TYPE_UPDATE_CUSTOMER_PROFILE = 3;
+  AGENT_ACTION_TYPE_UPDATE_LEAD_SCORE = 4;
+  AGENT_ACTION_TYPE_ESCALATE_TO_HUMAN = 5;
+  AGENT_ACTION_TYPE_CREATE_ORDER_DRAFT = 6;
+}
+
+message AgentDecision {
+  AgentDecisionType type = 1;
+  string reason = 2;
+  double confidence = 3;
+}
+
+message AgentAction {
+  AgentActionType type = 1;
+  string payload_json = 2;
+  string reason = 3;
+}
