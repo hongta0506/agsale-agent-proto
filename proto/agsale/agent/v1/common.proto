@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package agsale.agent.v1;
+
+option go_package = "github.com/hongta0506/agsale-agent-proto/gen/go/agsale/agent/v1;agentv1";
+
+enum AutomationMode {
+  AUTOMATION_MODE_UNSPECIFIED = 0;
+  AUTOMATION_MODE_HUMAN_ONLY = 1;
+  AUTOMATION_MODE_ASSIST_ONLY = 2;
+  AUTOMATION_MODE_BOT_AUTO_REPLY = 3;
+}
+
+message RequestContext {
+  string request_id = 1;
+  string tenant_id = 2;
+  string workspace_id = 3;
+  string idempotency_key = 4;
+  int64 occurred_at_unix_ms = 5;
+}
+
+message CustomerContext {
+  string customer_id = 1;
+  string display_name = 2;
+  string phone = 3;
+  string external_user_id = 4;
+  repeated string tags = 5;
+}
+
+message ConversationContext {
+  string conversation_id = 1;
+  string channel = 2; // facebook, zalo, telegram, whatsapp
+  string channel_conversation_id = 3;
+  string locale = 4;
+}
