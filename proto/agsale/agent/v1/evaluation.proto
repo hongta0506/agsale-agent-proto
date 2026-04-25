@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package agsale.agent.v1;
+
+option go_package = "github.com/hongta0506/agsale-agent-proto/gen/go/agsale/agent/v1;agentv1";
+
+message MessageEvaluation {
+  string intent = 1;
+  string sentiment = 2;
+  double urgency_score = 3;
+  double sales_opportunity_score = 4;
+  repeated string tags = 5;
+}
+
+message ConversationEvaluation {
+  string stage = 1;
+  double health_score = 2;
+  bool needs_human = 3;
+  string summary = 4;
+}
+
+message LeadScore {
+  double score = 1;
+  string grade = 2;
+  repeated string reasons = 3;
+}
