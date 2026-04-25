@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package agsale.agent.v1;
+
+option go_package = "github.com/hongta0506/agsale-agent-proto/gen/go/agsale/agent/v1;agentv1";
+
+message InboundMessage {
+  string message_id = 1;
+  string external_message_id = 2;
+  string sender_id = 3;
+  string text = 4;
+  repeated MessageAttachment attachments = 5;
+  int64 sent_at_unix_ms = 6;
+}
+
+message ConversationMessage {
+  string message_id = 1;
+  string sender_type = 2; // customer, staff, bot
+  string text = 3;
+  int64 sent_at_unix_ms = 4;
+}
+
+message MessageAttachment {
+  string type = 1;
+  string url = 2;
+  string mime_type = 3;
+}
+
+message ReplyDraft {
+  string text = 1;
+  repeated MessageAttachment attachments = 2;
+  string language = 3;
+  double confidence = 4;
+}
